@@ -1,4 +1,4 @@
-import { Position, MarkerType } from '@xyflow/svelte';
+import { Position } from '@xyflow/svelte';
 import { writable } from 'svelte/store';
 
 const nodeDefaults = {
@@ -14,8 +14,7 @@ export const nodes = writable([
 		data: {
 			label: '⬛️'
 		},
-
-		...nodeDefaults
+		type: 'oscilator'
 	},
 	{
 		id: '2',

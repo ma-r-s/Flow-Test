@@ -7,7 +7,7 @@
 
 <SvelteFlowProvider>
 	<div class="flex">
-		<div class="w-80">
+		<div class="w-60">
 			<Sidebar />
 		</div>
 		<div class="grow">

@@ -1,6 +1,7 @@
 <script>
 	import '@xyflow/svelte/dist/style.css';
 	import { nodes, edges } from './nodes-and-edges';
+	import Oscilator from './CustomNodes/Oscilator.svelte';
 	import {
 		Position,
 		SvelteFlow,
@@ -10,6 +11,9 @@
 		useSvelteFlow
 	} from '@xyflow/svelte';
 
+	const nodeTypes = {
+		oscilator: Oscilator
+	};
 	const { screenToFlowPosition } = useSvelteFlow();
 
 	const onDragOver = (event) => {
@@ -56,6 +60,7 @@
 		on:drop={onDrop}
 		{nodes}
 		{edges}
+		{nodeTypes}
 		fitView
 		proOptions={{ hideAttribution: true }}
 		class="bg-base-100"
