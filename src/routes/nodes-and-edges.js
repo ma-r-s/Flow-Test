@@ -1,10 +1,7 @@
-import { Position } from '@xyflow/svelte';
 import { writable } from 'svelte/store';
 
-const nodeDefaults = {
-	sourcePosition: Position.Right,
-	targetPosition: Position.Left,
-	class: 'rounded-full aspect-square w-20 bg-white flex items-center justify-center'
+const edgeDefaults = {
+	type: 'smoothstep'
 };
 
 export const nodes = writable([
@@ -14,45 +11,51 @@ export const nodes = writable([
 		data: {
 			label: '⬛️'
 		},
-		type: 'oscilator'
+		type: 'Trigger'
 	},
 	{
 		id: '2',
-		position: { x: 250, y: -100 },
+		position: { x: 200, y: 100 },
 		data: {
-			label: '🟩'
+			label: '⬛️'
 		},
-		...nodeDefaults
+		type: 'Pitch'
 	},
 	{
 		id: '3',
-		position: { x: 250, y: 100 },
+		position: { x: 400, y: 100 },
 		data: {
-			label: '🟧'
+			label: '⬛️'
 		},
-		...nodeDefaults
+		type: 'Oscilator'
 	},
 	{
 		id: '4',
-		position: { x: 500, y: 0 },
+		position: { x: 450, y: 50 },
 		data: {
-			label: '🟦'
+			label: '⬛️'
 		},
-		...nodeDefaults
+		type: 'Out'
 	}
 ]);
 
 export const edges = writable([
 	{
 		id: '1-2',
-		type: 'default',
 		source: '1',
-		target: '2'
+		target: '2',
+		...edgeDefaults
 	},
 	{
-		id: '1-3',
-		type: 'default',
+		id: '2-3',
 		source: '2',
-		target: '3'
+		target: '3',
+		...edgeDefaults
+	},
+	{
+		id: '3-4',
+		source: '3',
+		target: '4',
+		...edgeDefaults
 	}
 ]);

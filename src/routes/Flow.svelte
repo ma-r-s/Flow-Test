@@ -1,7 +1,10 @@
 <script>
 	import '@xyflow/svelte/dist/style.css';
 	import { nodes, edges } from './nodes-and-edges';
-	import Oscilator from './CustomNodes/Oscilator.svelte';
+	import OscilatorNode from './CustomNodes/Oscilator/OscilatorNode.svelte';
+	import PitchNode from './CustomNodes/Pitch/PitchNode.svelte';
+	import TriggerNode from './CustomNodes/Trigger/TriggerNode.svelte';
+	import OutNode from './CustomNodes/Out/OutNode.svelte';
 	import {
 		Position,
 		SvelteFlow,
@@ -12,7 +15,10 @@
 	} from '@xyflow/svelte';
 
 	const nodeTypes = {
-		oscilator: Oscilator
+		Oscilator: OscilatorNode,
+		Pitch: PitchNode,
+		Trigger: TriggerNode,
+		Out: OutNode
 	};
 	const { screenToFlowPosition } = useSvelteFlow();
 
@@ -31,8 +37,8 @@
 			return null;
 		}
 
-		const typ = event.dataTransfer.getData('application/svelteflow');
-		console.log(event);
+		const type = event.dataTransfer.getData('application/svelteflow');
+		console.log(type);
 
 		const position = screenToFlowPosition({
 			x: event.clientX,
@@ -41,10 +47,10 @@
 
 		const newNode = {
 			id: `${Math.random()}`,
-			typ,
+			type,
 			position,
-			data: { label: `${typ} node` },
-			origin: [0.5, 0.0],
+			data: { label: `${type} node` },
+			origin: [0, 0],
 			sourcePosition: Position.Right,
 			targetPosition: Position.Left
 		};
@@ -61,6 +67,8 @@
 		{nodes}
 		{edges}
 		{nodeTypes}
+		connectionLineType="smoothstep"
+		defaultEdgeOptions={{ type: 'smoothstep' }}
 		fitView
 		proOptions={{ hideAttribution: true }}
 		class="bg-base-100"
