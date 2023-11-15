@@ -1,51 +1,14 @@
 <script>
-	import { writable } from 'svelte/store';
-	import Sidebar from './Sidebar.svelte';
+	import '@xyflow/svelte/dist/style.css';
+	import { nodes, edges } from './nodes-and-edges';
 	import {
+		Position,
 		SvelteFlow,
 		Controls,
 		Background,
 		BackgroundVariant,
 		useSvelteFlow
 	} from '@xyflow/svelte';
-
-	import '@xyflow/svelte/dist/style.css';
-
-	const nodes = writable([
-		{
-			id: '1',
-			type: 'input',
-			data: { label: 'Node' },
-			position: { x: 0, y: 0 }
-		},
-		{
-			id: '2',
-			type: 'default',
-			data: { label: 'Node' },
-			position: { x: 0, y: 100 }
-		},
-		{
-			id: '3',
-			type: 'default',
-			data: { label: 'Node' },
-			position: { x: 0, y: 200 }
-		}
-	]);
-
-	const edges = writable([
-		{
-			id: '1-2',
-			type: 'default',
-			source: '1',
-			target: '2'
-		},
-		{
-			id: '1-3',
-			type: 'default',
-			source: '2',
-			target: '3'
-		}
-	]);
 
 	const { screenToFlowPosition } = useSvelteFlow();
 
@@ -77,7 +40,9 @@
 			typ,
 			position,
 			data: { label: `${typ} node` },
-			origin: [0.5, 0.0]
+			origin: [0.5, 0.0],
+			sourcePosition: Position.Right,
+			targetPosition: Position.Left
 		};
 
 		$nodes.push(newNode);
@@ -85,7 +50,7 @@
 	};
 </script>
 
-<div class="w-5/6 aspect-video">
+<div class="w-full h-screen">
 	<SvelteFlow
 		on:dragover={onDragOver}
 		on:drop={onDrop}
@@ -93,11 +58,10 @@
 		{edges}
 		fitView
 		proOptions={{ hideAttribution: true }}
-		class="bg-primary-content"
+		class="bg-base-100"
 		on:nodeclick={(event) => console.log('on node click', event.detail.node)}
 	>
 		<Controls />
 		<Background variant={BackgroundVariant.Dots} />
 	</SvelteFlow>
-	<Sidebar />
 </div>
