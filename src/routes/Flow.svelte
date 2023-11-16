@@ -1,10 +1,11 @@
 <script>
 	import '@xyflow/svelte/dist/style.css';
-	import { nodes, edges } from './nodes-and-edges';
+	import { nodes, edges, getID } from './nodes-and-edges';
 	import OscilatorNode from './CustomNodes/Oscilator/OscilatorNode.svelte';
 	import PitchNode from './CustomNodes/Pitch/PitchNode.svelte';
 	import TriggerNode from './CustomNodes/Trigger/TriggerNode.svelte';
 	import OutNode from './CustomNodes/Out/OutNode.svelte';
+
 	import {
 		Position,
 		SvelteFlow,
@@ -46,7 +47,7 @@
 		});
 
 		const newNode = {
-			id: `${Math.random()}`,
+			id: `${getID()}`,
 			type,
 			position,
 			data: { label: `${type} node` },
@@ -54,7 +55,7 @@
 			sourcePosition: Position.Right,
 			targetPosition: Position.Left
 		};
-
+		console.log(newNode.id);
 		$nodes.push(newNode);
 		$nodes = $nodes;
 	};
