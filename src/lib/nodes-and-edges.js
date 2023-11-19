@@ -1,10 +1,8 @@
 import { writable } from 'svelte/store';
-import { useConnection } from '@xyflow/svelte';
 let id = 4;
 const edgeDefaults = {
 	type: 'smoothstep'
 };
-const connection = useConnection();
 export let getID = () => {
 	id++;
 	return id.toString();

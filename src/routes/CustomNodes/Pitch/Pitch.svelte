@@ -1,30 +1,19 @@
 <script>
+	let notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
+	let octaves = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+	export let currNote = 'A';
+	export let currOct = '1';
 </script>
 
 <div class="bg-neutral rounded-lg p-2">
-	<select class="select select-sm =">
-		<option selected>A</option>
-		<option>A#</option>
-		<option>B</option>
-		<option>C</option>
-		<option>C#</option>
-		<option>D</option>
-		<option>D#</option>
-		<option>E</option>
-		<option>F</option>
-		<option>F#</option>
-		<option>G</option>
-		<option>G#</option>
+	<select bind:value={currNote} class="select select-sm">
+		{#each notes as note}
+			<option>{note}</option>
+		{/each}
 	</select>
-	<select class="select select-sm">
-		<option>1</option>
-		<option>2</option>
-		<option>3</option>
-		<option selected>4</option>
-		<option>5</option>
-		<option>6</option>
-		<option>7</option>
-		<option>8</option>
-		<option>9</option>
+	<select bind:value={currOct} class="select select-sm">
+		{#each octaves as octave}
+			<option>{octave}</option>
+		{/each}
 	</select>
 </div>

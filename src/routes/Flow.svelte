@@ -1,6 +1,6 @@
 <script>
 	import '@xyflow/svelte/dist/style.css';
-	import { nodes, edges, getID } from './nodes-and-edges';
+	import { nodes, edges, getID } from '$lib/nodes-and-edges';
 	import OscilatorNode from './CustomNodes/Oscilator/OscilatorNode.svelte';
 	import PitchNode from './CustomNodes/Pitch/PitchNode.svelte';
 	import TriggerNode from './CustomNodes/Trigger/TriggerNode.svelte';
@@ -73,7 +73,6 @@
 		fitView
 		proOptions={{ hideAttribution: true }}
 		class="bg-base-100"
-		on:nodeclick={(event) => console.log('on node click', event.detail.node)}
 	>
 		<Controls />
 		<Background variant={BackgroundVariant.Dots} />
